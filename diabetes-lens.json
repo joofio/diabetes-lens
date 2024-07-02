@@ -11,10 +11,10 @@
       "valueString": "dev"
     }
   ],
-  "url": "http://hl7.eu/fhir/ig/gravitate-health/Library/mock-lib",
+  "url": ",
   "identifier": [
     {
-      "system": "http://gravitate-health.lst.tfo.upm.es",
+      "system": "https://gravitate-health.lst.tfo.upm.es/ips/api/fhir/Library/591",
       "value": "diabetes-lens"
     }
   ],
