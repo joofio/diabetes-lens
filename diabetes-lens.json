@@ -11,10 +11,10 @@
       "valueString": "dev"
     }
   ],
-  "url": ",
+  "url": "https://gravitate-health.lst.tfo.upm.es/ips/api/fhir/Library/591"
   "identifier": [
     {
-      "system": "https://gravitate-health.lst.tfo.upm.es/ips/api/fhir/Library/591",
+      "system": "https://gravitate-health.lst.tfo.upm.es/",
       "value": "diabetes-lens"
     }
   ],
