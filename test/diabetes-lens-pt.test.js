@@ -4,7 +4,7 @@ const vm = require("vm");
 const { JSDOM } = require("jsdom");
 //TODO change data
 // Load your input data
-global.html = fs.readFileSync(path.join(__dirname, "../data/html2.html"), "utf-8");
+global.html = fs.readFileSync(path.join(__dirname, "../data/html.html"), "utf-8");
 global.epi = JSON.parse(fs.readFileSync(path.join(__dirname, "../data/epi.json")));
 
 // Set up DOM globally so the script can use it
@@ -38,12 +38,12 @@ beforeAll(() => {
   annotation = vm.runInContext(wrappedScript, context);
 });
 
-describe("Questionnaire adding Annotation Script (non-invasive)", () => {
+describe("Checklist adding Annotation Script (non-invasive)", () => {
   test("should return version string", () => {
     expect(annotation.getSpecification()).toBe("1.0.0");
   });
 
-  test("should return enhanced HTML containing questionaire link", async () => {
+  test("should return enhanced HTML containing checklist data", async () => {
     const result = await annotation.enhance();
 
     // Ensure output directory exists

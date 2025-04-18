@@ -141,7 +141,6 @@ let enhance = async () => {
     if (!epiData || !epiData.entry || epiData.entry.length === 0) {
         throw new Error("ePI is empty or invalid.");
     }
-    let listOfCategoriesToSearch = ["grav-3"]; //what to look in extensions -made up code because there is none
     // Match lists
     const BUNDLE_IDENTIFIER_LIST = ["epibundle-123", "epibundle-abc"]; //drugs for diabetes
     const PRODUCT_IDENTIFIER_LIST = ["CIT-204447", "RIS-197361"];//drugs for diabetes
@@ -227,7 +226,7 @@ let enhance = async () => {
     }
 
     if (!matchFound) {
-        console.log("ePI is not for a high-risk side effect medication");
+        console.log("ePI is not for a medication requiring checklist");
         return htmlData;
     }
 
