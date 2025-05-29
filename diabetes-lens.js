@@ -41,7 +41,7 @@ function loadChecklist(language) {
 
 
 
-const insertCheckListLink = (listOfCategories,language, document, response) => {
+const insertCheckListLink = (listOfCategories, language, document, response) => {
 
     if (language?.startsWith("pt")) {
         checklist = `
@@ -99,7 +99,7 @@ const insertCheckListLink = (listOfCategories,language, document, response) => {
           </ul>
         </div>
       `;
-    } 
+    }
     let foundCategory = false;
     console.log(listOfCategories)
     console.log(listOfCategories.length)
@@ -145,7 +145,7 @@ let enhance = async () => {
     const BUNDLE_IDENTIFIER_LIST = ["epibundle-123", "epibundle-abc"]; //drugs for diabetes
     const PRODUCT_IDENTIFIER_LIST = ["CIT-204447", "RIS-197361"];//drugs for diabetes
 
-    let listOfCategoriesToSearch = [{"code":"grav-4","system":"https://www.gravitatehealth.eu/sid/doc"}]; //what to look in extensions -made up code because there is none
+    let listOfCategoriesToSearch = [{ "code": "grav-4", "system": "https://www.gravitatehealth.eu/sid/doc" }]; //what to look in extensions -made up code because there is none
 
 
 
@@ -160,18 +160,18 @@ let enhance = async () => {
             console.log("🌍 Detected from Composition.language:", languageDetected);
         }
     });
-    
+
     // 2. If not found, check Bundle.language
     if (!languageDetected && epiData.language) {
         languageDetected = epiData.language;
         console.log("🌍 Detected from Bundle.language:", languageDetected);
     }
-    
+
     // 3. Fallback message
     if (!languageDetected) {
         console.warn("⚠️ No language detected in Composition or Bundle.");
     }
-    
+
     // Check bundle.identifier.value
     if (
         epiData.identifier &&
@@ -213,7 +213,8 @@ let enhance = async () => {
                             (coding) => {
                                 console.log("Extension: " + element.extension[0].valueString + ":" + coding.code)
                                 // Check if the code is in the list of categories to search
-                                if (listOfCategoriesToSearch.includes(coding.code)) {
+                                    if (listOfCategoriesToSearch.some(item => item.code === coding.code && item.system === coding.system)) {
+                                    console.log("Found", element.extension[0].valueString)
                                     // Check if the category is already in the list of categories
                                     categories.push(element.extension[0].valueString);
                                 }
@@ -244,11 +245,11 @@ let enhance = async () => {
             let { JSDOM } = jsdom;
             let dom = new JSDOM(htmlData);
             document = dom.window.document;
-            return insertCheckListLink(categories, languageDetected,document, response);
+            return insertCheckListLink(categories, languageDetected, document, response);
             //listOfCategories, enhanceTag, document, response
         } else {
             document = window.document;
-            return insertCheckListLink(categories,languageDetected, document, response);
+            return insertCheckListLink(categories, languageDetected, document, response);
         }
     };
 };
