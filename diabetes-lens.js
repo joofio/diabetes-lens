@@ -145,7 +145,10 @@ let enhance = async () => {
     const BUNDLE_IDENTIFIER_LIST = ["epibundle-123", "epibundle-abc"]; //drugs for diabetes
     const PRODUCT_IDENTIFIER_LIST = ["CIT-204447", "RIS-197361"];//drugs for diabetes
 
-    
+    let listOfCategoriesToSearch = [{"code":"grav-4","system":"https://www.gravitatehealth.eu/sid/doc"}]; //what to look in extensions -made up code because there is none
+
+
+
     let matchFound = false;
     let languageDetected = null;
 
