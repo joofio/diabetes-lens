@@ -103,7 +103,33 @@ const insertCheckListLink = (listOfCategories, language, document, response) => 
     let foundCategory = false;
     console.log(listOfCategories)
     console.log(listOfCategories.length)
+      listOfCategories.forEach((className) => {
+        if (
+            response.includes(`class="${className}`) ||
+            response.includes(`class='${className}`)
+        ) {
+            const elements = document.getElementsByClassName(className);
+            for (let i = 0; i < elements.length; i++) {
+                const el = elements[i];
+                const link = document.createElement("a");
+                link.setAttribute("href", linkHTML);
+                link.setAttribute("target", "_blank");
+                link.setAttribute("class", "questionnaire-lens");
 
+                if (shouldAppend) {
+                    // Append the link as a new element inside the existing element
+                    link.innerHTML = "📝 Fill out safety questionnaire";
+                    el.appendChild(link);
+                } else {
+                    // Wrap the existing contents of the element in the link
+                    link.innerHTML = el.innerHTML;
+                    el.innerHTML = "";
+                    el.appendChild(link);
+                }
+            }
+            foundCategory = true;
+        }
+    });
     // No matching category tags → inject banner at top
     if (!foundCategory) {
         const bannerDiv = document.createElement("div");
