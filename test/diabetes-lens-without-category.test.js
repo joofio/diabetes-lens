@@ -4,8 +4,10 @@ const vm = require("vm");
 const { JSDOM } = require("jsdom");
 
 // Load your input data
+// Use html2.html and epi2.json for the 'no category' case
 global.html = fs.readFileSync(path.join(__dirname, "../data/html2.html"), "utf-8");
-global.epi = JSON.parse(fs.readFileSync(path.join(__dirname, "../data/epi.json")));
+global.epi = JSON.parse(fs.readFileSync(path.join(__dirname, "../data/epi2.json")));
+global.ips = JSON.parse(fs.readFileSync(path.join(__dirname, "../data/ips.json")));
 
 // Set up DOM globally so the script can use it
 const dom = new JSDOM(global.html);
@@ -44,20 +46,9 @@ describe("Questionnaire adding Annotation Script (non-invasive)", () => {
   });
 
   test("should return enhanced HTML containing questionaire link", async () => {
+    // Change identifier to a non-matching value
+    global.epi.identifier.value = "not-a-match";
     const result = await annotation.enhance();
-
-    // Ensure output directory exists
-    const outputDir = path.join(__dirname, "../output");
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir);
-    }
-
-    // Save result to file
-    const outputPath = path.join(outputDir, "enhanced.html");
-    fs.writeFileSync(outputPath, result, "utf-8");
-
-    console.log(`✅ Enhanced HTML saved to: ${outputPath}`);
-
-    expect(result).toContain("class=\"checklist\"");
+    expect(result).toBe(global.html);
   });
 });
